@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <% include ../partials/head %>
+</head>
+<body>
+  <div class="page">
+    <div class="page-content">
+      <div class="container">
+        <h1 class="env-text">Error: <%= error.status %></h1>
+        <p class="env-text"><%= error.message %></p>
+        <p><a class="env-button" href="/">Gå tillbaka till formuläret</a></p>
+      </div><!--! .container -->
+    </div><!--! .page-content -->
+
+    <footer class="page-footer">
+      <% include ../partials/footer %>
+    </footer><!--! .page-footer -->
+  </div><!--! .page -->
+
+  <% include ../partials/foot %>
+</body>
+</html>

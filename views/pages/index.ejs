@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <% include ../partials/head %>
+</head>
+<body>
+  <div class="page">
+    <div class="page-content">
+      <div class="container">
+        <% if (url)  { %>
+          <div class="form-result">
+            <% if (version) { %>
+              <p class="env-text"><em><%= url %></em> använder troligtvis <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
+            <% } else { %>
+              <p class="env-text">Kunde tyvärr inte lista ut vilken version som <em><%= url %></em> använder.</p>
+              <p class="env-text">Kontrollera gärna att du fyllde i rätt webbadress.</p>
+            <% } %>
+          </div><!--! .form-result -->
+        <% } else { %>
+          <div class="hero env-text">
+            <h1>Ta reda på vilken version av SiteVision ni använder.</h1>
+            <p>Använd formuläret nedan för att ta reda på vilken version ni använder.</p>
+          </div><!--! .hero -->
+        <% } %>
+
+        <form id="form" class="env-form">
+          <div class="env-form-element">
+            <label for="url" class="env-form-element__label">Webbadress</label><!--! .env-form-element__label -->
+            <div class="env-form-element__control">
+              <input type="text" class="env-form-input" name="url" id="url" value="<%= url %>" aria-describedby="url-help"><!--! .env-form-input -->
+            </div><!--! .env-form-element__control -->
+            <span id="url-help" class="env-form-element__help env-color--base">Skriv in adressen till den webbplats du vill veta versionen för.</span>
+          </div><!--! .env-form-element -->
+
+          <div class="env-form-element">
+            <button class="env-button env-button--primary env-button--large">Skicka</button><!--! .env-button -->
+          </div><!--! .env-form-element -->
+        </form><!--! .env-form -->
+
+      </div><!--! .container -->
+    </div><!--! .page-content -->
+
+    <footer class="page-footer">
+      <div class="container">
+        <% include ../partials/footer %>
+      </div><!--! .container -->
+    </footer><!--! .page-footer -->
+  </div><!--! .page -->
+
+  <% include ../partials/foot %>
+</body>
+</html>
