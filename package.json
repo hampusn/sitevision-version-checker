@@ -17,8 +17,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "node-cache": "^4.1.1",
-    "request": "^2.83.0",
-    "valid-url": "^1.0.9"
+    "request": "^2.83.0"
   },
   "repository": {
     "type": "git",
