@@ -17,7 +17,7 @@ body {
 }
 
 body {
-  background: #2c3e50
+  background: #c0392b;
 }
 
 .container {
@@ -34,7 +34,7 @@ body {
 }
 
 .page-content {
-  background: #bdc3c7;
+  background: #f1e9cd;
   padding-top: 7rem;
 }
 
@@ -54,4 +54,43 @@ body {
 
 .hero {
   margin-bottom: 2rem;
+}
+
+
+/* Envision overrides */
+
+.env-text {
+  color: #34495e;
+}
+
+.env-button--primary {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}
+
+.env-button--primary:active,
+.env-button--primary:hover {
+  background-color: #3498db;
+}
+
+.env-form-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px #3498db;
+}
+
+
+/* Responsive */
+
+@media screen and (max-device-width: 800px) {
+  html {
+    font-size: 20px;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .page-content {
+    padding-top: 2rem;
+  }
 }
