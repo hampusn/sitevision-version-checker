@@ -1,8 +1,12 @@
 const express   = require('express');
-const request   = require('request');
 const cheerio   = require('cheerio');
 const math      = require('./helpers/math');
 const cache     = require('./helpers/cache');
+const request   = require('request').defaults({
+  "timeout": (process.env.REQUEST_TIMEOUT || 5000),
+  "maxRedirects": (process.env.REQUEST_MAX_REDIRECTS || 4),
+  "strictSSL": false
+});
 
 // Create server
 const app = express();
@@ -36,7 +40,7 @@ app.get('/', (req, res, next) => {
 
   if (valid) {
     cache(url, (url, resolve, reject) => {
-      request(url, {}, (error, response, body) => {
+      request(url, (error, response, body) => {
         if (error) {
           reject(error);
           return;
