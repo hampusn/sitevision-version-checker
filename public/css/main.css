@@ -39,6 +39,7 @@ body {
 }
 
 .page-footer {
+  line-height: 1.5;
   text-align: center;
 }
 
@@ -59,8 +60,28 @@ body {
 
 /* Envision overrides */
 
-.env-text {
+.env-text,
+.env-text a {
   color: #34495e;
+}
+
+.env-text a {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+}
+
+.env-text a:focus,
+.env-text a:hover {
+  border-bottom-color: #000;
+}
+
+a.env-color--lightest {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+a.env-color--lightest:focus,
+a.env-color--lightest:hover {
+  border-bottom-color: #fff;
 }
 
 .env-button--primary {
