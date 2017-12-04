@@ -2,23 +2,23 @@ const NodeCache = require('node-cache');
 const cacheTtl  = process.env.CACHE_TTL || 10800;
 const cache     = new NodeCache({"stdTTL": cacheTtl, "checkperiod": 0});
 
-module.exports = (url, callback) => {
+module.exports = (key, callback) => {
   let p = new Promise((resolve, reject) => {
-    let version = cache.get(url);
+    let value = cache.get(key);
 
-    if (version !== undefined) {
-      resolve(version);
+    if (value !== undefined) {
+      resolve(value);
     } else {
-      callback(url, resolve, reject);
+      callback(key, resolve, reject);
     }
   });
 
-  p.then((version) => {
-    let notCached = cache.get(url) === undefined;
+  p.then((value) => {
+    let notCached = cache.get(key) === undefined;
     if (notCached) {
-      cache.set(url, version);
+      cache.set(key, value);
     }
-    return version;
+    return value;
   }, (err) => {
     return err;
   });
