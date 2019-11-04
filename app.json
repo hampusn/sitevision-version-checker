@@ -1,0 +1,29 @@
+{
+  "name": "sitevision-version-checker",
+  "description": "Check which version of SiteVision a website is using.",
+  "repository": "https://github.com/hampusn/sitevision-version-checker",
+  "keywords": ["node", "sitevision"],
+  "env": {
+    "PORT": {
+      "description": "The port your server should listen to.",
+      "value": "5000"
+    },
+    "CACHE_TTL": {
+      "description": "The cache TTL in seconds for your version lookups. This is to make sure your server is not abused.",
+      "value": "10800"
+    },
+    "REQUEST_TIMEOUT": {
+      "description": "The maximum duration in milliseconds which your server will wait for the target site to answer.",
+      "value": "5000"
+    },
+    "REQUEST_MAX_REDIRECTS": {
+      "description": "The maximum number of redirects which will be followed during the request.",
+      "value": "4"
+    },
+    "NODE_ENV": {
+      "description": "The environment.",
+      "value": "development"
+    }
+  }
+}
+
