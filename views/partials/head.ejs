@@ -1,3 +1,16 @@
 <meta charset="utf-8">
+<meta name="description" content="Ta reda på vilken version av SiteVision som används på en webbplats.">
 <link rel="stylesheet" type="text/css" href="/vendor/envision/envision.css">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "<%- origin %>",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "<%- origin %>?url={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+</script>
