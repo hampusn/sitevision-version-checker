@@ -11,6 +11,9 @@ const request   = require('request').defaults({
 // Create server
 const app = express();
 
+// Misc server config
+app.disable('x-powered-by');
+
 // Set app variables
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
