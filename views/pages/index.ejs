@@ -10,7 +10,7 @@
         <% if (url)  { %>
           <div class="form-result">
             <% if (version) { %>
-              <p class="env-text"><em><%= url %></em> använder troligtvis <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
+              <p class="env-text"><em><%= url %></em> använder <% if (!exactVersion) { %>troligtvis<% } %> <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
             <% } else { %>
               <p class="env-text">Kunde tyvärr inte lista ut vilken version som <em><%= url %></em> använder.</p>
               <p class="env-text">Kontrollera gärna att du fyllde i rätt webbadress.</p>

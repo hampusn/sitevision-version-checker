@@ -46,24 +46,43 @@ app.get('/', (req, res, next) => {
           return;
         }
 
+        let version;
+        let exactVersion;
         const $ = cheerio.load(body);
 
-        let versions = $('head').find('link[type="text/css"][href^="/sitevision/"]').map((i, el) => {
-          let matches = $(el).attr('href').match(/\/sitevision\/(.*?)\//);
+        let pageContextScript = $('head').find('script:not(:empty)').toArray()
+          .map(tag => $(tag).html())
+          .filter(tag => (tag || '').includes('sv.PageContext = {'))
+          .pop();
 
-          if (matches && matches.length === 2) {
-            return matches[1];
+        if (pageContextScript) {
+          let res = pageContextScript.match(/versionPath: '(.*)'/);
+          if (res && res[1]) {
+            version = res[1];
+            exactVersion = true;
           }
-
-          return "";
-        }).get();
-
-        let topVersion = math.mode(versions);
+        }
         
-        resolve(topVersion);
+        if (!version) {
+          let versions = $('head').find('link[type="text/css"][href^="/sitevision/"]').map((i, el) => {
+            let matches = $(el).attr('href').match(/\/sitevision\/(.*?)\//);
+  
+            if (matches && matches.length === 2) {
+              return matches[1];
+            }
+  
+            return "";
+          }).get();
+  
+          version = math.mode(versions);
+          exactVersion = false;
+        }
+
+        resolve({version, exactVersion});
       });
-    }).then((version) => {
+    }).then(({version, exactVersion}) => {
       req.context.version = version;
+      req.context.exactVersion = exactVersion;
       res.render('pages/index', req.context);
     }).catch((error) => {
       error.status = error.status || 400;
