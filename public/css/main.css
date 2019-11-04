@@ -57,8 +57,23 @@ body {
   margin-bottom: 2rem;
 }
 
+.hero h1 {
+  margin-bottom: 0.65em;
+}
+
+.hero.env-text p {
+  font-size: 1.4em;
+  line-height: 1.4;
+}
+
 
 /* Envision overrides */
+
+.env-text--p,
+.env-text p,
+p.env-text {
+  font-size: 1.2em;
+}
 
 .env-text,
 .env-text a {
@@ -99,6 +114,14 @@ a.env-color--lightest:hover {
   box-shadow: 0 0 5px #3498db;
 }
 
+.env-form-element__label {
+  font-weight: 700;
+}
+
+.env-form-element__help {
+  font-size: 1em;
+}
+
 
 /* Responsive */
 
@@ -119,16 +142,30 @@ a.env-color--lightest:hover {
     font-size: 3em;
   }
 
+  .env-text a {
+    border-bottom-width: 8px;
+  }
+
   .env-text p {
-    line-height: 1.4;
+    line-height: 1.6;
+  }
+
+  .env-form-element {
+     margin-bottom: 3em;
   }
 
   .env-form-element__label {
     font-size: 1.5em;
   }
 
+  .env-form-element__help {
+    line-height: 1.4;
+  }
+
   .env-button--large {
+    display: block;
     font-size: 2.5em;
+    width: 100%;
   }
 
   .env-form-input {
