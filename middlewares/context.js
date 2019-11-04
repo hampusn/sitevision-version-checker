@@ -27,7 +27,7 @@ module.exports = () => {
 
     req.context.hostname = req.hostname;
     req.context.protocol = req.headers['x-forwarded-proto'] || req.protocol;
-    req.context.origin = `${req.protocol}://${req.hostname}/`;
+    req.context.origin = `${req.context.protocol}://${req.context.hostname}/`;
 
     req.context.app = {
       "version": project.version,
