@@ -4,7 +4,8 @@
   "description": "Check which version of SiteVision a website is using.",
   "main": "app.js",
   "scripts": {
-    "start": "node --use_strict app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": {
     "name": "Hampus Nordin",
@@ -30,5 +31,8 @@
   "engines": {
     "node": "8.7.0",
     "npm": "5.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }
