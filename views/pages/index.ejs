@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
+  <title><%= app.siteName %></title>
   <% include ../partials/head %>
 </head>
 <body>
   <div class="page">
-    <div class="page-content">
+    <main class="page-content">
       <div class="container">
         <% if (url)  { %>
-          <div class="form-result">
+          <div class="hero form-result env-text">
             <% if (version) { %>
-              <p class="env-text"><em><%= url %></em> använder <% if (!exactVersion) { %>troligtvis<% } %> <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
+              <h1 class="env-text--h2">Version funnen!</h1>
+              <p><em><%= url %></em> använder <% if (!exactVersion) { %>troligtvis<% } %> <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
             <% } else { %>
-              <p class="env-text">Kunde tyvärr inte lista ut vilken version som <em><%= url %></em> använder.</p>
-              <p class="env-text">Kontrollera gärna att du fyllde i rätt webbadress.</p>
+              <h1>Ingen version funnen</h1>
+              <p>Kunde tyvärr inte lista ut vilken version som <em><%= url %></em> använder.</p>
+              <p>Kontrollera gärna att du fyllde i rätt webbadress.</p>
             <% } %>
           </div><!--! .form-result -->
         <% } else { %>
@@ -38,7 +41,7 @@
         </form><!--! .env-form -->
 
       </div><!--! .container -->
-    </div><!--! .page-content -->
+    </main><!--! .page-content -->
 
     <footer class="page-footer">
       <div class="container">

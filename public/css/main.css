@@ -43,18 +43,13 @@ body {
   text-align: center;
 }
 
-.form-result {
-  font-size: 1.3em;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
 .form-result__version {
   white-space: nowrap;
 }
 
 .hero {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .hero h1 {
@@ -136,6 +131,10 @@ a.env-color--lightest:hover {
 
   .page-content {
     padding-top: 2rem;
+  }
+
+  .hero {
+    text-align: left;
   }
 
   .env-text h1 {
