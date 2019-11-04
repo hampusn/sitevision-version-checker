@@ -25,9 +25,9 @@ module.exports = () => {
   return function contextMiddleware (req, res, next) {
     req.context = req.context || {};
 
-    req.context.host = req.host;
-    req.context.protocol = req.protocol;
-    req.context.origin = `${req.protocol}://${req.host}/`;
+    req.context.hostname = req.hostname;
+    req.context.protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    req.context.origin = `${req.protocol}://${req.hostname}/`;
 
     req.context.app = {
       "version": project.version,
