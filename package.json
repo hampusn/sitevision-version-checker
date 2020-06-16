@@ -15,10 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "ejs": "^2.7.1",
+    "ejs": "^2.7.4",
     "express": "^4.17.1",
-    "node-cache": "^5.0.1",
-    "request": "^2.88.0"
+    "node-cache": "^5.1.1",
+    "request": "^2.88.2"
   },
   "repository": {
     "type": "git",
