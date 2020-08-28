@@ -29,7 +29,7 @@
         <form id="form" class="form">
           <div class="form-element">
             <label for="url" class="form-label">Webbadress</label><!--! .form-label -->
-            <input type="text" class="form-field" name="url" id="url" value="<%= url %>" aria-describedby="url-help"><!--! .form-field -->
+            <input type="text" class="form-field" name="url" id="url" value="<%= url %>" aria-describedby="url-help" autofocus><!--! .form-field -->
             <span id="url-help" class="form-help">Skriv in adressen till den webbplats du vill veta versionen för.</span><!--! .form-help -->
           </div><!--! .form-element -->
 
@@ -47,7 +47,5 @@
       </div><!--! .container -->
     </footer><!--! .page-footer -->
   </div><!--! .page -->
-
-  <% include ../partials/foot %>
 </body>
 </html>
