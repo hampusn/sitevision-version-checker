@@ -1,12 +1,7 @@
 const express   = require('express');
-const cheerio   = require('cheerio');
-const math      = require('./helpers/math');
-const cache     = require('./helpers/cache');
-const request   = require('request').defaults({
-  "timeout": (process.env.REQUEST_TIMEOUT || 5000),
-  "maxRedirects": (process.env.REQUEST_MAX_REDIRECTS || 4),
-  "strictSSL": false
-});
+const HTTPFetcher = require('./services/HTTPFetcher');
+const VersionExtractor = require('./services/VersionExtractor');
+const ResultCache = require('./services/ResultCache');
 
 // Create server
 const app = express();
@@ -25,12 +20,12 @@ app.use(require('./middlewares/form-data')());
 app.use(express.static(__dirname + '/public'));
 
 // Start server
-const http = app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
   console.log("Server listening on port: %s", app.get('port'));
 });
 
 
-app.get('/', (req, res, next) => {
+app.get('/', async (req, res, next) => {
   let url   = req.context.url;
   let valid = req.context.valid;
 
@@ -41,59 +36,32 @@ app.get('/', (req, res, next) => {
     return next(error);
   }
 
-  if (valid) {
-    cache(url, (url, resolve, reject) => {
-      request(url, (error, response, body) => {
-        if (error) {
-          reject(error);
-          return;
-        }
+  if (url) {
+    try {
+      const cache = new ResultCache(url);
+      let data = cache.get();
 
-        let version;
-        let exactVersion;
-        const $ = cheerio.load(body);
-
-        let pageContextScript = $('head').find('script:not(:empty)').toArray()
-          .map(tag => $(tag).html())
-          .filter(tag => (tag || '').includes('sv.PageContext = {'))
-          .pop();
-
-        if (pageContextScript) {
-          let res = pageContextScript.match(/versionPath: '(.*)'/);
-          if (res && res[1]) {
-            version = res[1];
-            exactVersion = true;
-          }
-        }
-        
-        if (!version) {
-          let versions = $('head').find('link[type="text/css"][href^="/sitevision/"]').map((i, el) => {
-            let matches = $(el).attr('href').match(/\/sitevision\/(.*?)\//);
-  
-            if (matches && matches.length === 2) {
-              return matches[1];
-            }
-  
-            return "";
-          }).get();
-  
-          version = math.mode(versions);
-          exactVersion = false;
-        }
-
-        resolve({version, exactVersion});
-      });
-    }).then(({version, exactVersion}) => {
+      if (!data) {
+        const fetcher = new HTTPFetcher(url);
+        const result = await fetcher.execute();
+      
+        const extractor = new VersionExtractor(result.body);
+        data = extractor.execute();
+    
+        cache.set(data);
+      }
+    
+      const { version = '', exactVersion = false } = data || {};
+    
       req.context.version = version;
       req.context.exactVersion = exactVersion;
-      res.render('pages/index', req.context);
-    }).catch((error) => {
-      error.status = error.status || 400;
-      next(error);
-    });
-  } else {
-    res.render('pages/index', req.context);
+    } catch (e) {
+      e.status = e.status || 400;
+      return next(e);
+    }
   }
+
+  return res.render('pages/index', req.context);
 });
 
 
