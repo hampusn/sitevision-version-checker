@@ -2,6 +2,8 @@
 
 html {
   box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
 }
 
 html,
@@ -16,8 +18,31 @@ body {
   box-sizing: inherit;
 }
 
+*:focus {
+  outline: 0.15rem solid #b71540;
+  outline-offset: 0.15rem;
+}
+
 body {
-  background: #c0392b;
+  background: #38807B;
+  color: #072943;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+input, button, .button {
+  font-size: inherit;
+  padding: 0.5em 0.75em;
+}
+
+a {
+  border-bottom: 0.1em solid currentColor;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -34,18 +59,22 @@ body {
 }
 
 .page-content {
-  background: #f1e9cd;
-  padding-top: 7rem;
+  background: #fad390;
+  border-top: 1rem solid #f8e4bf;
+  padding-top: 5.5rem;
 }
 
 .page-footer {
-  line-height: 1.5;
+  color: #fff;
   text-align: center;
 }
 
-.form-result__version {
-  white-space: nowrap;
+.page-footer :focus {
+  outline-color: #0c2461;
 }
+
+
+/* Hero */
 
 .hero {
   margin-bottom: 2rem;
@@ -53,68 +82,68 @@ body {
 }
 
 .hero h1 {
-  margin-bottom: 0.65em;
+  font-size: 2.1em;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 0.8em;
 }
 
-.hero.env-text p {
+.hero p {
   font-size: 1.4em;
-  line-height: 1.4;
 }
 
 
-/* Envision overrides */
+/* Form */
 
-.env-text--p,
-.env-text p,
-p.env-text {
-  font-size: 1.2em;
+.form-result__version {
+  white-space: nowrap;
 }
 
-.env-text,
-.env-text a {
-  color: #34495e;
+.form-element {
+  margin-bottom: 1em;
 }
 
-.env-text a {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 0;
+.form-label,
+.form-field,
+.form-help {
+  display: block;
 }
 
-.env-text a:focus,
-.env-text a:hover {
-  border-bottom-color: #000;
+.form-label {
+  font-weight: 600;
 }
 
-a.env-color--lightest {
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+.form-field {
+  border: 0.1em solid rgba(0, 0, 0, 0.5);
+  border-bottom-width: 0.2em;
+  border-radius: 0.2em;
+  width: 100%;
 }
 
-a.env-color--lightest:focus,
-a.env-color--lightest:hover {
-  border-bottom-color: #fff;
+.form-field:hover {
+  border-color: #000;
 }
 
-.env-button--primary {
-  background-color: #2980b9;
-  border-color: #2980b9;
+.form-help {
+  font-style: italic;
+  margin-top: 0.25em;
 }
 
-.env-button--primary:active,
-.env-button--primary:hover {
-  background-color: #3498db;
+
+/* Button */
+
+.button {
+  background-color: #3c6382;
+  border: 0.1em solid rgba(0, 0, 0, 0.5);
+  border-bottom-width: 0.2em;
+  border-radius: 0.2em;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
 }
 
-.env-form-input:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 5px #3498db;
-}
-
-.env-form-element__label {
-  font-weight: 700;
-}
-
-.env-form-element__help {
-  font-size: 1em;
+.button:hover {
+  background-color: #0e3859;
 }
 
 
@@ -122,7 +151,11 @@ a.env-color--lightest:hover {
 
 @media screen and (max-device-width: 800px) {
   html {
-    font-size: 30px;
+    font-size: 46px;
+  }
+
+  p {
+    line-height: 1.6;
   }
 
   .container {
@@ -137,37 +170,33 @@ a.env-color--lightest:hover {
     text-align: left;
   }
 
-  .env-text h1 {
-    font-size: 3em;
+  .hero h1 {
+    font-size: 1.6em;
   }
 
-  .env-text a {
-    border-bottom-width: 8px;
+  .hero p {
+    font-size: 1em;
   }
 
-  .env-text p {
-    line-height: 1.6;
+  .form-element {
+     margin-bottom: 2em;
   }
 
-  .env-form-element {
-     margin-bottom: 3em;
+  .form-label {
+    font-size: 1.2em;
   }
 
-  .env-form-element__label {
+  .form-field {
     font-size: 1.5em;
   }
 
-  .env-form-element__help {
+  .form-help {
     line-height: 1.4;
   }
 
-  .env-button--large {
+  .form .button {
     display: block;
-    font-size: 2.5em;
+    font-size: 1.5em;
     width: 100%;
-  }
-
-  .env-form-input {
-    font-size: 2em;
   }
 }

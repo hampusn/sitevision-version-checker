@@ -9,9 +9,9 @@
     <main class="page-content">
       <div class="container">
         <% if (url)  { %>
-          <div class="hero form-result env-text">
+          <div class="hero form-result">
             <% if (version) { %>
-              <h1 class="env-text--h2">Version funnen!</h1>
+              <h1>Version funnen!</h1>
               <p><em><%= url %></em> använder <% if (!exactVersion) { %>troligtvis<% } %> <strong class="form-result__version">SiteVision <%= version %></strong>.</p>
             <% } else { %>
               <h1>Ingen version funnen</h1>
@@ -20,25 +20,23 @@
             <% } %>
           </div><!--! .form-result -->
         <% } else { %>
-          <div class="hero env-text">
+          <div class="hero">
             <h1>Ta reda på vilken version av <a href="https://sitevision.se/">SiteVision</a> som används.</h1>
             <p>Använd formuläret nedan för att ta reda på vilken version som används på en webbplats.</p>
           </div><!--! .hero -->
         <% } %>
 
-        <form id="form" class="env-form">
-          <div class="env-form-element">
-            <label for="url" class="env-form-element__label">Webbadress</label><!--! .env-form-element__label -->
-            <div class="env-form-element__control">
-              <input type="text" class="env-form-input" name="url" id="url" value="<%= url %>" aria-describedby="url-help"><!--! .env-form-input -->
-            </div><!--! .env-form-element__control -->
-            <span id="url-help" class="env-form-element__help env-color--base">Skriv in adressen till den webbplats du vill veta versionen för.</span>
-          </div><!--! .env-form-element -->
+        <form id="form" class="form">
+          <div class="form-element">
+            <label for="url" class="form-label">Webbadress</label><!--! .form-label -->
+            <input type="text" class="form-field" name="url" id="url" value="<%= url %>" aria-describedby="url-help"><!--! .form-field -->
+            <span id="url-help" class="form-help">Skriv in adressen till den webbplats du vill veta versionen för.</span><!--! .form-help -->
+          </div><!--! .form-element -->
 
-          <div class="env-form-element">
-            <button class="env-button env-button--primary env-button--large">Skicka</button><!--! .env-button -->
-          </div><!--! .env-form-element -->
-        </form><!--! .env-form -->
+          <div class="form-element">
+            <button class="button">Skicka</button><!--! .button -->
+          </div><!--! .form-element -->
+        </form><!--! .form -->
 
       </div><!--! .container -->
     </main><!--! .page-content -->
