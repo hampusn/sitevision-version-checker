@@ -1,7 +1,8 @@
-const express   = require('express');
+const express = require('express');
 const HTTPFetcher = require('./services/HTTPFetcher');
 const VersionExtractor = require('./services/VersionExtractor');
 const ResultCache = require('./services/ResultCache');
+const boom = require('@hapi/boom');
 
 // Create server
 const app = express();
@@ -16,7 +17,8 @@ app.set('port', (process.env.PORT || 5000));
 
 // Setup middlewares
 app.use(require('./middlewares/context')());
-app.use(require('./middlewares/form-data')());
+app.use(require('./middlewares/data')());
+app.use(require('./middlewares/respond')());
 app.use(express.static(__dirname + '/public'));
 
 // Start server
@@ -26,14 +28,11 @@ app.listen(app.get('port'), () => {
 
 
 app.get('/', async (req, res, next) => {
-  let url   = req.context.url;
-  let valid = req.context.valid;
+  let url = req.data.url;
+  let valid = req.data.valid;
 
   if (url && !valid) {
-    let error = new Error();
-    error.status = 400;
-    error.message = 'Ogiltig webbadress';
-    return next(error);
+    return next(boom.badRequest('Ogiltig webbadress.'));
   }
 
   if (url) {
@@ -53,41 +52,36 @@ app.get('/', async (req, res, next) => {
     
       const { version = '', exactVersion = false } = data || {};
     
-      req.context.version = version;
-      req.context.exactVersion = exactVersion;
+      req.data.version = version;
+      req.data.exactVersion = exactVersion;
     } catch (e) {
-      e.status = e.status || 400;
+      boom.boomify(e, { statusCode: 400 });
       return next(e);
     }
   }
 
-  return res.render('pages/index', req.context);
+  return res.respond('pages/index', req.data, req.context);
 });
 
 
 // Error handlers
 
 app.get('*', (req, res, next) => {
-  let error = new Error();
-  error.status = 404;
-  error.message = 'The resource you were looking for could not be found.';
-  next(error);
+  next(boom.notFound('Innehållet du letade efter kunde inte hittas.'));
 });
 
 app.use((error, req, res, next) => {
+  if (!boom.isBoom(error)) {
+    boom.boomify(error);
+  }
+  
   if (res.headersSent) {
     return next(error);
   }
 
-  res.status(error.status || 500);
+  
+  res.status(error.output.statusCode);
 
-  if (req.xhr) {
-    res.send({
-      "status": error.status,
-      "error": error.message
-    });
-  } else {
-    req.context.error = error;
-    res.render('pages/error', req.context);
-  }
+  req.data.error = error.output.payload;
+  res.respond('pages/error', req.data, req.context);
 });

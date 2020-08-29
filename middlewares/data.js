@@ -9,7 +9,7 @@ function ensureProtocol (url) {
 }
 
 module.exports = () => {
-  return function formDataMiddleware (req, res, next) {
+  return function dataMiddleware (req, res, next) {
     let url   = (req.query.url || '').toLowerCase();
     let valid = false;
     let urlObj;
@@ -32,9 +32,9 @@ module.exports = () => {
       }
     }
 
-    req.context = req.context || {};
-    req.context.url = url;
-    req.context.valid = valid;
+    req.data = req.data || {};
+    req.data.url = url;
+    req.data.valid = valid;
 
     next();
   };
