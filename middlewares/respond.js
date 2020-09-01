@@ -11,6 +11,7 @@ class Responder {
 
   respond (view = '', data = {}, context = {}) {
     if (this.isJson()) {
+      this.res.set('Access-Control-Allow-Origin', '*');
       this.res.json(data);
     }  else {
       // Default to HTML with view rendering.
