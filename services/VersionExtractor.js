@@ -41,6 +41,12 @@ class VersionExtractor {
       extracted.exactVersion = false;
     }
 
+    // Sanity check. ¯\_(ツ)_/¯
+    if (extracted.version && extracted.version.length > 30) {
+      extracted.version = '';
+      extracted.exactVersion = false;
+    }
+
     return extracted;
   }
 }
