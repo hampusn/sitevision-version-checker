@@ -1,6 +1,6 @@
 {
   "name": "sitevision-version-checker",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Check which version of SiteVision a website is using.",
   "main": "app.js",
   "scripts": {
