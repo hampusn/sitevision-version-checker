@@ -23,6 +23,10 @@
     "NODE_ENV": {
       "description": "The environment.",
       "value": "development"
+    },
+    "HASH_DICT": {
+      "description": "A comma-separated list of hashes with versions where each pair consists of HASH:VERSION",
+      "value": "aa366e465ef4a40617901f572817c098aa366e465ef4a40617901f572817c098:1.2.3"
     }
   }
 }

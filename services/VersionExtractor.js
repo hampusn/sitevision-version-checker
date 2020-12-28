@@ -1,9 +1,26 @@
 const cheerio = require('cheerio');
 const math = require('../helpers/math');
+const { HASH_DICT =  '' } = process.env;
+const PAIR_DELIM = ',';
+const KEYVAL_DELIM = ':';
 
 class VersionExtractor {
   constructor (body) {
     this._body = body;
+    this._dict = this.parseDict(HASH_DICT, PAIR_DELIM, KEYVAL_DELIM);
+  }
+
+  parseDict (dictString, pairDelim, keyvalDelim) {
+    return dictString
+      .split(pairDelim)
+      .map(pairStr => pairStr.split(keyvalDelim))
+      .reduce((dict, [ k, v ]) => {
+        if (k && v) {
+          dict[k] = v;
+        }
+
+        return dict;
+      }, {});
   }
 
   execute () {
@@ -41,10 +58,10 @@ class VersionExtractor {
       extracted.exactVersion = false;
     }
 
-    // Sanity check. ¯\_(ツ)_/¯
-    if (extracted.version && extracted.version.length > 30) {
-      extracted.version = '';
-      extracted.exactVersion = false;
+    // Handle version hashes.
+    if (extracted.version && !extracted.version.includes('.') && extracted.version.length > 10) {
+      extracted.version = this._dict[extracted.version] || '';
+      extracted.exactVersion = !!extracted.version;
     }
 
     return extracted;
