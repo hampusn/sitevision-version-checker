@@ -14,11 +14,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^9.1.0",
-    "cheerio": "^1.0.0-rc.3",
+    "@hapi/boom": "^9.1.1",
+    "cheerio": "^1.0.0-rc.5",
     "ejs": "^2.7.4",
     "express": "^4.17.1",
-    "got": "^11.8.0",
+    "got": "^11.8.1",
     "node-cache": "^5.1.2"
   },
   "repository": {
@@ -34,6 +34,6 @@
     "npm": "6.11.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   }
 }
