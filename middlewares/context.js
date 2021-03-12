@@ -34,7 +34,7 @@ module.exports = () => {
       "author": project.author,
       "license": project.license,
       "name": project.name,
-      "siteName": "SiteVision version checker",
+      "siteName": "Sitevision version checker",
       "githubUrl": project.homepage,
       "licenseSPDX": project.license,
       "licenseUrl": githubUrl(project.homepage, 'blob/master/LICENSE')

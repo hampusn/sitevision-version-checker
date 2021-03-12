@@ -1,3 +1,3 @@
-# SiteVision Version Checker
+# Sitevision Version Checker
 
-Check which version of SiteVision a website is using.
+Check which version of Sitevision a website is using.

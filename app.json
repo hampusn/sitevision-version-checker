@@ -1,6 +1,6 @@
 {
   "name": "sitevision-version-checker",
-  "description": "Check which version of SiteVision a website is using.",
+  "description": "Check which version of Sitevision a website is using.",
   "repository": "https://github.com/hampusn/sitevision-version-checker",
   "keywords": ["node", "sitevision"],
   "env": {
